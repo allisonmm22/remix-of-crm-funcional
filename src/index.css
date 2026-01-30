@@ -1,0 +1,405 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* TEMA HÍBRIDO PROFISSIONAL: Conteúdo claro + Sidebar escura */
+    
+    /* Background principal - BRANCO */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    /* Cards - Off-white */
+    --card: 210 40% 98%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* COR PRIMÁRIA - Turquesa/Teal profissional */
+    --primary: 168 76% 42%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 168 76% 42%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Bordas claras */
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 168 76% 42%;
+
+    --radius: 0.75rem;
+
+    /* Cores adicionais para o CRM */
+    --success: 168 76% 42%;
+    --warning: 38 92% 50%;
+    --info: 217 91% 60%;
+
+    /* Cores para status */
+    --online: 168 76% 42%;
+    --offline: 0 0% 50%;
+    --away: 38 92% 50%;
+
+    /* Gradientes atualizados */
+    --gradient-primary: linear-gradient(135deg, hsl(168 76% 42%) 0%, hsl(175 70% 38%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(210 40% 99%) 0%, hsl(210 40% 98%) 100%);
+    --gradient-sidebar: linear-gradient(180deg, hsl(210 50% 12%) 0%, hsl(210 50% 8%) 100%);
+
+    /* Sombras suaves para tema claro */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+    --shadow-glow: 0 0 20px hsl(168 76% 42% / 0.25);
+
+    /* SIDEBAR - Mantém escura para contraste */
+    --sidebar-background: 210 50% 10%;
+    --sidebar-foreground: 210 40% 80%;
+    --sidebar-primary: 168 76% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 50% 15%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 210 50% 15%;
+    --sidebar-ring: 168 76% 42%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Scrollbar personalizada para tema claro */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(210 40% 96%);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(215 16% 75%);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(215 16% 60%);
+  }
+}
+
+@layer components {
+  /* Animações */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  /* Cards com hover */
+  .card-hover {
+    @apply transition-all duration-300;
+  }
+
+  .card-hover:hover {
+    @apply shadow-lg;
+    transform: translateY(-2px);
+  }
+
+  /* Status indicators */
+  .status-online {
+    background: hsl(168 76% 42%);
+  }
+
+  .status-offline {
+    background: hsl(215 16% 60%);
+  }
+
+  .status-away {
+    background: hsl(38 92% 50%);
+  }
+
+  /* Glassmorphism effect */
+  .glass {
+    @apply bg-card/80 backdrop-blur-lg border border-border/50;
+  }
+
+  /* Conversation card hover effects */
+  .conversation-card {
+    @apply transition-all duration-200 ease-out;
+    border-left: 3px solid transparent;
+  }
+
+  .conversation-card:hover {
+    background: hsl(210 40% 96%);
+    transform: translateX(2px);
+  }
+
+  .conversation-card.active {
+    border-left-color: hsl(var(--primary));
+    @apply bg-primary/10;
+  }
+
+  .conversation-card.unread {
+    border-left-color: hsl(var(--primary));
+  }
+
+  /* Message bubbles */
+  .message-bubble {
+    @apply transition-all duration-200;
+  }
+
+  .message-bubble-sent {
+    background: linear-gradient(135deg, hsl(168 76% 42%) 0%, hsl(175 70% 38%) 100%);
+    box-shadow: 0 2px 8px hsl(168 76% 42% / 0.25);
+  }
+
+  .message-bubble-received {
+    background: hsl(210 40% 96%);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.08);
+  }
+
+  /* Typing indicator */
+  .typing-indicator {
+    @apply flex items-center gap-1 px-3 py-2;
+  }
+
+  .typing-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background: hsl(215 16% 60%);
+    animation: typingDot 1.4s ease-in-out infinite;
+  }
+
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  /* Send button animation */
+  .send-button {
+    @apply transition-all duration-150;
+  }
+
+  .send-button:active {
+    transform: scale(0.95);
+  }
+
+  .send-button:hover:not(:disabled) {
+    box-shadow: 0 0 16px hsl(var(--primary) / 0.5);
+  }
+
+  /* Date separator */
+  .date-separator {
+    @apply relative flex items-center justify-center my-4;
+  }
+
+  .date-separator::before,
+  .date-separator::after {
+    content: '';
+    @apply flex-1 h-px bg-border/50;
+  }
+
+  .date-separator span {
+    @apply px-4 text-xs text-muted-foreground bg-background;
+  }
+
+  /* Online status pulse */
+  .online-pulse {
+    @apply relative;
+  }
+
+  .online-pulse::after {
+    content: '';
+    @apply absolute inset-0 rounded-full;
+    animation: onlinePulse 2s ease-in-out infinite;
+  }
+
+  /* Empty state animation */
+  .empty-state-icon {
+    @apply transition-all duration-500;
+    animation: floatIcon 3s ease-in-out infinite;
+  }
+
+  /* Input focus glow */
+  .input-glow:focus {
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.2);
+  }
+
+  /* Avatar ring */
+  .avatar-ring {
+    @apply ring-2 ring-offset-2 ring-offset-background;
+  }
+
+  .avatar-ring-primary {
+    @apply ring-primary;
+  }
+
+  .avatar-ring-online {
+    @apply ring-green-500;
+  }
+}
+
+@keyframes typingDot {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes onlinePulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsl(168 76% 42% / 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 6px hsl(168 76% 42% / 0);
+  }
+}
+
+@keyframes floatIcon {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px hsl(168 76% 42% / 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px hsl(168 76% 42% / 0.8);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@layer components {
+  .animate-slide-in-right {
+    animation: slideInRight 0.3s ease-out;
+  }
+
+  /* CRM Kanban Scrollbars */
+  .crm-kanban-scroll {
+    scroll-behavior: smooth;
+  }
+
+  .crm-kanban-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .crm-kanban-scroll::-webkit-scrollbar-track {
+    @apply bg-muted/30 rounded-full;
+  }
+
+  .crm-kanban-scroll::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full;
+    transition: background 0.2s;
+  }
+
+  .crm-kanban-scroll::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/40;
+  }
+
+  /* CRM Stage Column Scrollbar */
+  .crm-stage-scroll {
+    scroll-behavior: smooth;
+  }
+
+  .crm-stage-scroll::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .crm-stage-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .crm-stage-scroll::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 10px;
+    transition: background 0.3s;
+  }
+
+  .crm-stage-scroll:hover::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30;
+  }
+
+  .crm-stage-scroll::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+}
